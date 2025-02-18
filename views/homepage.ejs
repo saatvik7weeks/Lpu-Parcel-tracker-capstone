@@ -1,0 +1,352 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Delivery LPU</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+  <style>
+    /* General styles */
+body {
+    display: flex;
+    flex-direction: column;
+  /* Align content vertically */
+    min-height: 100vh; 
+  /* Ensure body takes up full viewport height */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    width: 100%;
+    margin:0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.page {
+    padding: 20px;
+    display: none;
+}
+
+.page-header {
+   margin-bottom: 20px;
+}
+
+#home {
+    display: block; 
+  /* Show homepage by default */
+}
+
+/* Homepage content */
+.homepage-content {
+    text-align: center;
+    margin-top: 50px;
+   flex-grow: 1; 
+}
+
+.content-container {
+    background-color: #333;
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    padding-top: 20px;
+}
+
+/* Send a Parcel Form */
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    border: 2px solid #333;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hiden;
+}
+
+.form-container label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-container input,
+.form-container select,
+.form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;  /* Space between fields */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensures padding is included in the width */
+    font-size: 16px;
+}
+
+.form-container textarea {
+    resize: vertical;
+  /* Allow users to resize the textarea */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;  
+    margin-top: auto;
+    
+  
+}
+
+/* Modal */
+#parcelModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#parcelModal div {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#parcelModal button {
+    margin-top: 20px;
+    background-color: #444;
+}
+
+  </style>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home" id="homeLink">Home</a></li>
+                <li><a href="#sendParcel">Send a Parcel</a></li>
+                <li><a href="#trackParcel">Track a Parcel</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="home" class="page">
+        <div class="homepage-content">
+            <div class="content-container">
+                <div class="page-header">
+                    <h2>Welcome to Parcel Courier</h2>
+                </div>
+                <p>Send and track your parcels easily with our simple and efficient system.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Send a Parcel Page -->
+    <div id="sendParcel" class="page" style="display:none;">
+        <div class="page-header">
+            <h2>Send a Parcel</h2>
+        </div>
+        <form id="sendForm" action="https://submit-form.com/ZsQXAptVJ" method="POST">
+            <div class="form-container">
+                <label for="senderAddress">Sender Address:</label>
+                <input type="text" id="senderAddress" name="senderAddress" required>
+
+                <label for="recipientAddress">Recipient Address:</label>
+                <input type="text" id="recipientAddress" name="recipientAddress" required>
+
+                <label for="weight">Weight of Parcel (kg):</label>
+                <input type="number" id="weight" name="weight" required>
+
+                <!-- New Field: Parcel Type -->
+                <label for="parcelType">Parcel Type:</label>
+                <select id="parcelType" name="parcelType" required>
+                    <option value="document">Document</option>
+                    <option value="box">Box</option>
+                    <option value="envelope">Envelope</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <!-- New Field: Insurance Option -->
+                <label for="insurance">Do you want to add insurance?</label>
+                <select id="insurance" name="insurance" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+                <!-- New Field: Delivery Date -->
+                <label for="deliveryDate">Preferred Delivery Date:</label>
+                <input type="date" id="deliveryDate" name="deliveryDate" required>
+
+                <!-- New Field: Special Instructions -->
+                <label for="specialInstructions">Special Instructions:</label>
+                <textarea id="specialInstructions" name="specialInstructions" rows="4" placeholder="Any special instructions for delivery?"></textarea>
+
+                <button type="submit">Send Parcel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Track a Parcel Page -->
+    <div id="trackParcel" class="page" style="display:none;">
+        <div class="page-header">
+            <h2>Track a Parcel</h2>
+        </div>
+        <form id="trackForm">
+            <div class="form-container">
+                <label for="trackingNumber">Enter Tracking Number:</label>
+                <input type="text" id="trackingNumber" name="trackingNumber" required>
+                <button type="submit">Track Parcel</button>
+            </div>
+        </form>
+        <div id="trackingResponse"></div>
+    </div>
+
+    <!-- Modal for Parcel Confirmation -->
+    <div id="parcelModal">
+        <div>
+            <h3>Parcel Details</h3>
+            <p><strong>Sender Address:</strong> <span id="modalSenderAddress"></span></p>
+            <p><strong>Recipient Address:</strong> <span id="modalRecipientAddress"></span></p>
+            <p><strong>Weight:</strong> <span id="modalWeight"></span> kg</p>
+            <p><strong>Tracking Number:</strong> <span id="modalTrackingNumber"></span></p>
+            <button id="closeModalBtn">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Parcel Delivery. All rights reserved.</p>
+    </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const pages = document.querySelectorAll('.page');
+    const navLinks = document.querySelectorAll('header nav ul li a');
+    const homePage = document.getElementById('home');
+    const sendForm = document.getElementById('sendForm');
+    const parcelModal = document.getElementById('parcelModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    // Show/Hide pages based on navigation
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = e.target.getAttribute('href').slice(1);
+            pages.forEach(page => page.style.display = 'none');
+            document.getElementById(target).style.display = 'block';
+        });
+    });
+
+    // Homepage link functionality
+    document.getElementById('homeLink').addEventListener('click', function (e) {
+        e.preventDefault();
+        pages.forEach(page => page.style.display = 'none');
+        homePage.style.display = 'block';
+        sendForm.reset();
+        document.getElementById('trackForm').reset();
+    });
+
+    // Handle send parcel form submission
+    sendForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const senderAddress = document.getElementById('senderAddress').value;
+        const recipientAddress = document.getElementById('recipientAddress').value;
+        const weight = document.getElementById('weight').value;
+
+        // Generate tracking number and show modal
+        const trackingNumber = generateTrackingNumber();
+        localStorage.setItem('trackingNumber', trackingNumber);
+
+        // Show the modal
+        showModal(senderAddress, recipientAddress, weight, trackingNumber);
+    });
+
+    // Close modal functionality
+    closeModalBtn.addEventListener('click', function () {
+        parcelModal.style.display = 'none';
+    });
+
+    // Function to show modal with parcel details
+    function showModal(senderAddress, recipientAddress, weight, trackingNumber) {
+        document.getElementById('modalSenderAddress').textContent = senderAddress;
+        document.getElementById('modalRecipientAddress').textContent = recipientAddress;
+        document.getElementById('modalWeight').textContent = weight;
+        document.getElementById('modalTrackingNumber').textContent = trackingNumber;
+        parcelModal.style.display = 'flex';
+    }
+
+    // Tracking parcel functionality
+    document.getElementById('trackForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const enteredTrackingNumber = document.getElementById('trackingNumber').value;
+        const storedTrackingNumber = localStorage.getItem('trackingNumber');
+        const responseContainer = document.getElementById('trackingResponse');
+
+        if (enteredTrackingNumber === storedTrackingNumber) {
+            responseContainer.innerHTML = `<p>Tracking Number: ${enteredTrackingNumber} - Status: In Transit</p>`;
+        } else {
+            responseContainer.innerHTML = `<p>Invalid tracking number. Please try again.</p>`;
+        }
+    });
+
+    // Function to generate a random tracking number
+    function generateTrackingNumber() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let result = '';
+        for (let i = 0; i < 10; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+});
+
+</script>
+</body>
+</html>
